@@ -8,17 +8,40 @@ xml:fb="http://www.facebook.com/2008/fbml">
 
 <div id="fb-root"></div>
 
-<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" data-scope="public_profile,user_events,rsvp_event" onlogin="redirect()"></div>
+<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="true" data-scope="public_profile,user_events,rsvp_event" onlogin="redirect()"></div>
 
 <script type="text/javascript">
+   function statusChangeCallback(response) {
+      console.log('statusChangeCallback');
+      console.log(response);
+
+      if (response.status === 'connected') {
+         redirect();
+      } else if (response.status === 'not_authorized') {
+         console.log('NOT AUTHORIZED');
+      } else {
+         console.log('NOT LOGGED INTO FACEBOOK');
+      }
+   }
+
+   function checkLoginState() {
+      FB.getLoginStatus(function(response) {
+         statusChangeCallback(response);
+      });
+   }
+
    window.fbAsyncInit = function() {
       FB.init({
-         appId : parseInt(<%= Facebook::APP_ID %>, 10),
-         status : true,
+         appId : <%= Facebook::APP_ID %>,
          cookie : true,
          xfbml : true,
-         oauth : true
+         version : 'v2.2'
       });
+
+      FB.getLoginStatus(function(response) {
+         statusChangeCallback(response);
+      });
+
    };
 
    (function(d, s, id) {
@@ -28,11 +51,33 @@ xml:fb="http://www.facebook.com/2008/fbml">
       js.src = "//connect.facebook.net/en_US/all.js"; //sdk.js#xfbml=1&appId=<%= Facebook::APP_ID %>&version=v2.3
       fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-   
+
    function redirect() {
-      location.href = '/success'
+      console.log('Welcome!');
+      FB.api('/me', function(response) {
+         console.log('Successful login on login.html for: ' + response.name);
+         console.log(response);
+         uid = response['id'];
+         //console.log(uid);
+      });
+
+      FB.api('/me/events', function(response) {
+         console.log(response);
+         for (var curEvent = response.data.length - 1; curEvent >= 0; curEvent -= 1) {
+            document.getElementById('events').innerHTML += 'Event ' + (response.data.length -curEvent - 1) + ": " + response.data[curEvent].name + '</br>';
+         }
+         //document.getElementById('events').innerHTML = 'Event 1' + response.data[0].name;
+      });
+      //console.log(uid);
+      //console.log('test');
+      //session['FB'] = FB;
+
+      //location.href = '/success'
    }
 </script>
+
+<div id="events">
+</div>
 
 </body>
 </html>

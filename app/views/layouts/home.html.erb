@@ -6,17 +6,16 @@
 
 SUP
 <div id="fb-root"></div>
-<script src="//connect.facebook.net/en_US/all.js"></script>
+<!-- <script src="//connect.facebook.net/en_US/all.js"></script> -->
 
 <script type="text/javascript">
+FB = session['FB'];
 console.log('hihi');
-   window.fbAsyncInit = function() {
       console.log(FB);
       FB.api('/me', function(response) {
-         console.log('im a banana');
+         console.log('Successful login for: ' + response.name);
          console.log(JSON.stringify(response));
       });
-   };
 </script>
 
 </body>

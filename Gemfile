@@ -14,7 +14,9 @@ gem 'figaro'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'sqlite3', '1.3.10'
+gem 'sqlite3'
+gem 'omniauth-facebook'
+gem 'omniauth'
 
 group :doc do
   gem 'sdoc', require: false
