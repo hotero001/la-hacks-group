@@ -2,7 +2,7 @@
 xml:fb="http://www.facebook.com/2008/fbml">
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-<title>Udooz Sample</title>
+<title>Nonaddictive Login</title>
 <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
 </head>
 <body>
@@ -16,9 +16,14 @@ xml:fb="http://www.facebook.com/2008/fbml">
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="true" data-scope="public_profile,user_events,rsvp_event"></div>
+<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" data-scope="public_profile,user_events,rsvp_event" onlogin="redirect()"></div>
 
-<h1>udooz</h1>
+<script type="text/javascript">
+function redirect() {
+   location.href = '/home'
+}
+</script>
+
 </body>
 </html>
 
