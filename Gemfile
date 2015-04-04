@@ -14,6 +14,7 @@ gem 'figaro'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'sqlite3', '1.3.10'
 
 group :doc do
   gem 'sdoc', require: false
@@ -22,7 +23,7 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'pry'
-  gem 'sqlite3'
+#  gem 'sqlite3'
 end
 
 group :production do
