@@ -3,25 +3,35 @@ xml:fb="http://www.facebook.com/2008/fbml">
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <title>Nonaddictive Login</title>
-<script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
 </head>
 <body>
 
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=<%= Facebook::APP_ID %>&version=v2.3";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" data-scope="public_profile,user_events,rsvp_event" onlogin="redirect()"></div>
 
 <script type="text/javascript">
-function redirect() {
-   location.href = '/home'
-}
+   window.fbAsyncInit = function() {
+      FB.init({
+         appId : parseInt(<%= Facebook::APP_ID %>, 10),
+         status : true,
+         cookie : true,
+         xfbml : true,
+         oauth : true
+      });
+   };
+
+   (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js"; //sdk.js#xfbml=1&appId=<%= Facebook::APP_ID %>&version=v2.3
+      fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+   
+   function redirect() {
+      location.href = '/success'
+   }
 </script>
 
 </body>

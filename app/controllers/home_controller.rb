@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
    
    def index
-      me = @graph.get_object("me")
-
+      @access_token = session[:access_token]
+      @graph = Koala::Facebook::GraphAPI.new(@access_token)
+      
    end
 end
