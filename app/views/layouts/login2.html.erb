@@ -5,7 +5,39 @@ xml:fb="http://www.facebook.com/2008/fbml">
 <title>Nonaddictive Login</title>
 </head>
 <body>
-    <script type="text/javascript">
+<tr>
+    <td>
+        <div id="threadmsg">
+        </div>
+    </td>
+    
+    <td>
+        <tr>
+            <div id="sendmsg">
+<a id="myLink" title="Send Message" href="#" onclick="SendMessage();return false;">Send Message</a>
+</div>
+        </tr>
+        <tr>
+            <div id="historymsg">
+            </div>
+            
+        </tr>
+    </td>
+    
+    <td>
+        <tr>
+            
+<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="true" data-scope="public_profile,user_events,rsvp_event,read_mailbox" onlogin="redirect()"></div>
+            
+        </tr>
+        <tr>
+            <div id="events">
+            </div>
+        </tr>
+    </td>
+</tr>
+</body>
+<script type="text/javascript">
  function statusChangeCallback(response) {
       console.log('statusChangeCallback');
       console.log(response);
@@ -56,12 +88,6 @@ xml:fb="http://www.facebook.com/2008/fbml">
          //console.log(uid);
       });
 
-      FB.api( "/{thread-id}", function (response) {
-      if (response && !response.error) {
-        /* handle the result */
-      }
-    });
-
       FB.api('/me/events', function(response) {
          //console.log(response);
          for (var curEvent = response.data.length - 1; curEvent >= 0; curEvent -= 1) {
@@ -88,44 +114,4 @@ xml:fb="http://www.facebook.com/2008/fbml">
       });
    }
    </script>
-    <table>
-<tr>
-    <td id="colOne">
-        <a id="threadmsg">
-            thread msg thread msg thread msg thread msg 
-        </a>
-    </td>
-    
-    <td id="colTwo">
-        <table>
-        <tr>
-           
-<a id="myLink" title="Send Message" href="#" onclick="SendMessage();return false;">Send Message </br> </a>
-
-        </tr>
-        <tr>
-            <a id="historymsg">
-                history msg  history msg history msg
-            </a>
-            
-        </tr>
-        </table>
-    </td>
-    
-    <td id="colThree">
-        <table>
-        <tr>
-            
-
-            
-        </tr>
-        <tr>
-            <a id="events">
-                List of events </br>
-        </tr>
-        </table>
-    </td>
-</tr>
-</table>
-</body>
 </html>
