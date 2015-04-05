@@ -74,9 +74,21 @@ xml:fb="http://www.facebook.com/2008/fbml">
 
       //location.href = '/success'
    }
+
+   function SendMessage() {
+      console.log('Sending message...');
+      FB.ui({
+         method: 'send',
+         link: 'http://lahacks.com/'
+      });
+   }
 </script>
 
 <div id="events">
+</div>
+
+<div id="sendmsg">
+<a id="myLink" title="Send Message" href="#" onclick="SendMessage();return false;">Send Message</a>
 </div>
 
 </body>

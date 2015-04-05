@@ -7,6 +7,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'koala', '~> 1.11.0rc'
 gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'figaro'
+gem 'xmpp4r'
+gem 'facebook_chat'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
