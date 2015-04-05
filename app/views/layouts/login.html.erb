@@ -8,7 +8,7 @@ xml:fb="http://www.facebook.com/2008/fbml">
 
 <div id="fb-root"></div>
 
-<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="true" data-scope="public_profile,user_events,rsvp_event" onlogin="redirect()"></div>
+<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="true" data-scope="public_profile,user_events,rsvp_event,read_mailbox" onlogin="redirect()"></div>
 
 <script type="text/javascript">
    function statusChangeCallback(response) {
@@ -56,21 +56,25 @@ xml:fb="http://www.facebook.com/2008/fbml">
       console.log('Welcome!');
       FB.api('/me', function(response) {
          console.log('Successful login on login.html for: ' + response.name);
-         console.log(response);
+         //console.log(response);
          uid = response['id'];
          //console.log(uid);
       });
 
       FB.api('/me/events', function(response) {
-         console.log(response);
+         //console.log(response);
          for (var curEvent = response.data.length - 1; curEvent >= 0; curEvent -= 1) {
             document.getElementById('events').innerHTML += 'Event ' + (response.data.length -curEvent - 1) + ": " + response.data[curEvent].name + '</br>';
          }
          //document.getElementById('events').innerHTML = 'Event 1' + response.data[0].name;
       });
+
       //console.log(uid);
       //console.log('test');
       //session['FB'] = FB;
+      FB.api('/me/inbox', function(response) {
+         console.log(response);
+      });
 
       //location.href = '/success'
    }
@@ -89,6 +93,9 @@ xml:fb="http://www.facebook.com/2008/fbml">
 
 <div id="sendmsg">
 <a id="myLink" title="Send Message" href="#" onclick="SendMessage();return false;">Send Message</a>
+</div>
+
+<div id="inbox">
 </div>
 
 </body>
